@@ -134,7 +134,7 @@
     "name": "Supabase",
     "category": "Backend",
     "description": "An open-source backend platform powered by PostgreSQL.",
-    "icon": "https://icon.icepanel.io/Technology/svg/Supabase.svg",
+    "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/supabase.webp",
     "rating": 4.8,
     "difficulty": "Intermediate",
     "badge": "Open Source"
