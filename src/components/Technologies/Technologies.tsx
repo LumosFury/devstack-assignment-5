@@ -5,7 +5,7 @@ import TechnologyCard from "./TechnologyCard";
 interface AvailableProps {
   technology: ItechnologyTypes[];
   selectedTechnology: ItechnologyTypes[];
-  setSelectedTechnology: Dispatch<SetStateAction<object[]>>;
+  setSelectedTechnology: Dispatch<SetStateAction<ItechnologyTypes[]>>;
 }
 
 const Technologies = ({

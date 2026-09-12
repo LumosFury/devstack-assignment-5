@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { ItechnologyTypes } from "../../types/technologyTypes";
 import { Slide, toast } from "react-toastify";
@@ -6,16 +5,21 @@ import { Slide, toast } from "react-toastify";
 interface AvailableTechProps {
   tech: ItechnologyTypes;
   selectedTechnology: ItechnologyTypes[];
-  setSelectedTechnology: Dispatch<SetStateAction<object[]>>;
+  setSelectedTechnology: Dispatch<SetStateAction<ItechnologyTypes[]>>;
 }
 const TechnologyCard = ({
   tech,
   selectedTechnology,
   setSelectedTechnology,
 }: AvailableTechProps) => {
-  const [isSelected, setIsSelected] = useState(false);
+  const isSelected = selectedTechnology.some(
+    (selectedTech) => selectedTech.id === tech.id,
+  );
   const handleSelectedTech = () => {
-    setIsSelected(true);
+    setSelectedTechnology((currentTechnologies) => {
+      return [...currentTechnologies, tech];
+    });
+
     toast.success(`${tech.name} added successfully`, {
       position: "bottom-right",
       autoClose: 3000,
@@ -28,7 +32,6 @@ const TechnologyCard = ({
       transition: Slide,
     });
 
-    setSelectedTechnology([...selectedTechnology, tech])
   };
   return (
     <div className="w-95 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
@@ -50,9 +53,7 @@ const TechnologyCard = ({
         <h3 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">
           {tech.name}
         </h3>
-        <p className="text-slate-500 text-base">
-          {tech.description}
-        </p>
+        <p className="text-slate-500 text-base">{tech.description}</p>
       </div>
       <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm text-slate-600 mb-6">
         <span className="bg-slate-100/80 px-3 py-1.5 rounded-lg font-medium text-slate-700">

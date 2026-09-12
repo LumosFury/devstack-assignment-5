@@ -5,7 +5,7 @@ import type { Dispatch, SetStateAction } from "react";
 interface ItechnologyTypesProps {
   techs: ItechnologyTypes;
   selectedTechnology: ItechnologyTypes[];
-  setSelectedTechnology: Dispatch<SetStateAction<object[]>>;
+  setSelectedTechnology: Dispatch<SetStateAction<ItechnologyTypes[]>>;
 }
 const SelectedTechCard = ({
   techs,
