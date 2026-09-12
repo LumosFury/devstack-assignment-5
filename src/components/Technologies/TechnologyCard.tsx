@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { ItechnologyTypes } from "../../types/technologyTypes";
 import { Slide, toast } from "react-toastify";
+import { MdDone } from "react-icons/md";
 
 interface AvailableTechProps {
   tech: ItechnologyTypes;
@@ -31,10 +32,15 @@ const TechnologyCard = ({
       theme: "light",
       transition: Slide,
     });
-
   };
   return (
-    <div className="w-95 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+    <div
+      className={
+        isSelected
+          ? `w-95 bg-white rounded-3xl p-6 border border-pink-600 shadow-sm flex flex-col justify-between`
+          : `w-95 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between`
+      }
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="w-12 h-12 flex items-center justify-center">
           <img
@@ -44,7 +50,7 @@ const TechnologyCard = ({
           />
         </div>
         {tech.badge && (
-          <span className="bg-sky-50 text-sky-500 text-sm px-4 py-1.5 rounded-full font-medium">
+          <span className="bg-pink-50 text-pink-600 text-sm px-4 py-1.5 rounded-full font-medium">
             {tech.badge}
           </span>
         )}
@@ -69,12 +75,18 @@ const TechnologyCard = ({
         onClick={() => handleSelectedTech()}
         className={`w-full font-medium py-3.5 rounded-xl transition-colors border ${
           isSelected
-            ? "bg-white text-slate-900 border-slate-900 cursor-not-allowed"
+            ? "bg-pink-100 text-[#EC4899] border-none cursor-not-allowed"
             : "bg-[#0a0f1d] text-white cursor-pointer"
         }`}
         disabled={isSelected}
       >
-        {isSelected ? "Selected" : "Add to Stack"}
+        {isSelected ? (
+          <span className="flex items-center justify-center gap-1.5">
+            <MdDone /> Added to stack
+          </span>
+        ) : (
+          "Add to Stack"
+        )}
       </button>
     </div>
   );
