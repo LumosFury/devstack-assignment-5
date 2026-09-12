@@ -1,11 +1,18 @@
 import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { ItechnologyTypes } from "../../types/technologyTypes";
 import { Slide, toast } from "react-toastify";
 
 interface AvailableTechProps {
   tech: ItechnologyTypes;
+  selectedTechnology: ItechnologyTypes[];
+  setSelectedTechnology: Dispatch<SetStateAction<object[]>>;
 }
-const TechnologyCard = ({ tech }: AvailableTechProps) => {
+const TechnologyCard = ({
+  tech,
+  selectedTechnology,
+  setSelectedTechnology,
+}: AvailableTechProps) => {
   const [isSelected, setIsSelected] = useState(false);
   const handleSelectedTech = () => {
     setIsSelected(true);
@@ -20,9 +27,11 @@ const TechnologyCard = ({ tech }: AvailableTechProps) => {
       theme: "light",
       transition: Slide,
     });
+
+    setSelectedTechnology([...selectedTechnology, tech])
   };
   return (
-    <div className="w-95 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between font-sans">
+    <div className="w-95 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between mb-4">
         <div className="w-12 h-12 flex items-center justify-center">
           <img
@@ -41,7 +50,7 @@ const TechnologyCard = ({ tech }: AvailableTechProps) => {
         <h3 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">
           {tech.name}
         </h3>
-        <p className="text-slate-500 text-base leading-relaxed">
+        <p className="text-slate-500 text-base">
           {tech.description}
         </p>
       </div>
@@ -60,7 +69,7 @@ const TechnologyCard = ({ tech }: AvailableTechProps) => {
         className={`w-full font-medium py-3.5 rounded-xl transition-colors border ${
           isSelected
             ? "bg-white text-slate-900 border-slate-900 cursor-not-allowed"
-            : "bg-[#0a0f1d] text-white"
+            : "bg-[#0a0f1d] text-white cursor-pointer"
         }`}
         disabled={isSelected}
       >

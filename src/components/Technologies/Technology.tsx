@@ -1,17 +1,18 @@
-import { use } from "react";
+import { use, useState } from "react";
 import type { ItechnologyTypes } from "../../types/technologyTypes";
 import Technologies from "./Technologies";
+import SelectedTechnologies from "./SelectedTechnologies";
 interface TechnologiesProps {
   technologiesPromise: Promise<ItechnologyTypes[]>;
 }
 
 const TechnologyCard = ({ technologiesPromise }: TechnologiesProps) => {
   const tech = use(technologiesPromise);
-  // console.log(techlonogy)
+  const [selectedTechnology, setSelectedTechnology] = useState<ItechnologyTypes[]>([]);
   return (
     <div className="container mx-auto mt-28">
       <div>
-        <h2 className="font-extrabold text-4xl">
+        <h2 className="font-extrabold text-4xl mb-2">
           Explore the{" "}
           <span className="bg-linear-to-r from-[#EC4899] to-[#8B5CF6] bg-clip-text text-transparent">
             Technologies
@@ -21,9 +22,16 @@ const TechnologyCard = ({ technologiesPromise }: TechnologiesProps) => {
           Pick one technology per category to build your ideal stack.
         </p>
       </div>
-      <div className="flex">
-        <Technologies technology={tech} />
-        <h2>okjbaslefjnb</h2>
+      <div className="flex gap-8 items-start">
+        <Technologies
+          technology={tech}
+          selectedTechnology={selectedTechnology}
+          setSelectedTechnology={setSelectedTechnology}
+        />
+        <SelectedTechnologies
+          selectedTechnology={selectedTechnology}
+          setSelectedTechnology={setSelectedTechnology}
+        />
       </div>
     </div>
   );

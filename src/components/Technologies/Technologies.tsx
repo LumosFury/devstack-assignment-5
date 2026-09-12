@@ -1,18 +1,28 @@
-import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { ItechnologyTypes } from "../../types/technologyTypes";
 import TechnologyCard from "./TechnologyCard";
 
-interface AvailableProps{
-    technology: ItechnologyTypes[]
+interface AvailableProps {
+  technology: ItechnologyTypes[];
+  selectedTechnology: ItechnologyTypes[];
+  setSelectedTechnology: Dispatch<SetStateAction<object[]>>;
 }
 
-const Technologies = ({ technology }:AvailableProps) => {
-    const [] = useState()
+const Technologies = ({
+  technology,
+  selectedTechnology,
+  setSelectedTechnology,
+}: AvailableProps) => {
   return (
-    <div className="grid grid-cols-3 gap-y-5 gap-x-2 mt-10">
-      {technology.map((tech:ItechnologyTypes) => {
+    <div className="grid grid-cols-3 gap-y-5 gap-x-8 mt-10">
+      {technology.map((tech: ItechnologyTypes) => {
         return (
-            <TechnologyCard key={tech.id} tech = {tech}/>
+          <TechnologyCard
+            key={tech.id}
+            tech={tech}
+            selectedTechnology={selectedTechnology}
+            setSelectedTechnology={setSelectedTechnology}
+          />
         );
       })}
     </div>
