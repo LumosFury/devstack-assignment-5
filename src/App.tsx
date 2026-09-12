@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import { Suspense } from "react";
 import type { ItechnologyTypes } from "./types/technologyTypes";
 
-const technologiesFetch = async ():Promise<ItechnologyTypes[]> => {
+const technologiesFetch = async (): Promise<ItechnologyTypes[]> => {
   const res = await fetch("/data.json");
   const data = await res.json();
   return data;
@@ -16,10 +16,16 @@ function App() {
     <>
       <Nav />
       <Banner />
-      <Suspense fallback = {<span className="loading loading-spinner loading-xl"></span>}>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center">
+            <span className="loading loading-spinner loading-xl"></span>
+          </div>
+        }
+      >
         <TechnologyCard technologiesPromise={technologiesPromise} />
       </Suspense>
-      <Footer/>
+      <Footer />
     </>
   );
 }
